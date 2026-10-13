@@ -1,0 +1,17 @@
+[Unit]
+Description=kd-dispatcher: motor de secuencias programadas (FastAPI)
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/kd-dispatcher
+EnvironmentFile=/opt/kd-dispatcher/.env
+ExecStart=/opt/kd-dispatcher/.venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8001
+Restart=always
+RestartSec=5
+StandardOutput=append:/opt/kd-dispatcher/logs/service.log
+StandardError=append:/opt/kd-dispatcher/logs/service.log
+
+[Install]
+WantedBy=multi-user.target
