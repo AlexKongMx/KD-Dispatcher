@@ -1,0 +1,7 @@
+[Unit]
+Description=kd-dispatcher tick (cada 5 min)
+
+[Service]
+Type=oneshot
+EnvironmentFile=/opt/kd-dispatcher/.env
+ExecStart=/bin/bash -c 'curl -s -m 120 -X POST -H "X-Admin-Token: ${DISPATCHER_ADMIN_TOKEN}" http://127.0.0.1:8001/admin/tick'
